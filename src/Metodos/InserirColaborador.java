@@ -37,25 +37,16 @@ public class InserirColaborador {
         int dias = (localDate.now().getDayOfMonth() - localDate.getDayOfMonth());
 
 
-        if(Colaborador.validarCpf(cpf) && anos > 18){
+        if(Colaborador.validarCpf(cpf) && Period.between(localDate, LocalDate.now()).getYears() >= 18){
             Colaborador colaborador = new Colaborador(matricula, cpf, nome, data);
             Colaborador.listaColaborador.add(colaborador);
             System.out.println("Colaborador Adicionado com sucesso!");
-        }else if(anos == 18 && mes >= 0 ){
-            if(dias >= 0){
-                Colaborador colaborador = new Colaborador(matricula, cpf, nome, data);
-                Colaborador.listaColaborador.add(colaborador);
-                System.out.println("Colaborador Adicionado com sucesso!");
-            }else{
-                System.out.println(anos);
-                System.out.println(dias);
-                System.out.println(mes);
+        } else if (Colaborador.validarCpf(cpf) && Period.between(localDate, LocalDate.now()).getYears() < 18){
                 System.out.println("Colaborador menor de idade. Não pode ser inserido.");
-            }
-        }
-        else {
+        } else {
             System.out.println("CPF Inválido.");
         }
+
 
     }
 
